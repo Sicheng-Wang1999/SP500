@@ -6,10 +6,10 @@ execute:
   echo: true
 
 book:
-  title: "YOUR PROJECT TITLE"
+  title: "SP500"
   author:
-    - AUTHOR1 (UNI1)
-    - AUTHOR2 (UNI2)
+    - Sicheng Wang (sw3868)
+    - Shuai He (sh4225)
   repo-url: https://github.com/YOUR_GITHUB_ACCOUNT/REPO_NAME
   date: today
   page-footer:
