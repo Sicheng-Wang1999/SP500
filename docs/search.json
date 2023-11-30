@@ -4,7 +4,21 @@
     "href": "index.html",
     "title": "SP500",
     "section": "",
-    "text": "1 Introduction"
+    "text": "1 Introduction\nThis project aims to unravel the mysteries and trends hidden behind the S&P 500 Index. The S&P 500, or Standard & Poor’s 500, represents a collection of 500 leading companies and takes up approximately 80% of available market capitalization."
+  },
+  {
+    "objectID": "index.html#why-explore-sp-500",
+    "href": "index.html#why-explore-sp-500",
+    "title": "SP500",
+    "section": "1.1 Why Explore S&P 500",
+    "text": "1.1 Why Explore S&P 500\nThe S&P 500 gives us a snapshot of how well the economy is doing. If just a few companies is not doing well on a single day, it doesn’t drag the index down as there are 500 companies. Thus, S&P 500 often serves as a benchmark for US stock markets, that people often compare with their portfolio with to assess the standing of performance and diversity of individual portfolio relative to the overall market. By exploring the SP500 index on its correlation with economic factors such as interest rates, and through breakdowns by location of headquarter or sector of individual stock. We hope to find hints on how to build the right portfolio at the right time."
+  },
+  {
+    "objectID": "index.html#what-to-expect",
+    "href": "index.html#what-to-expect",
+    "title": "SP500",
+    "section": "1.2 What to Expect",
+    "text": "1.2 What to Expect\n\n1. Performance of Index v.s. individual stock\nWe are interested in seeing the trends of the S&P 500 Index within 5 years and its comparison with individual constituents of the index. Which subset of the pool outperforms the index.\n\n\n2. Sector/location v.s. Performance\nAfter locating the companies that have over/under index performance, we would like to investigate if that has any correlation with certain properties of the company including headquarter location and business sector.\n\n\n3. Resilience v.s. Performance\nIdentify bad times, and see how soon the economy recovers. Is it true that companies that can recover fast from bad economic situations will succeed?\n\n\n4. Interest Rate/Unemployment Rate v.s. S&P 500 index\nHow are macroeconomic factors including Interest Rate/Unemployment Rate related to the S&P 500 index?"
   },
   {
     "objectID": "data.html#description",
