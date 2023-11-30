@@ -22,3 +22,4 @@ df <- df |> rownames_to_column("id") |> pivot_longer(cols = -id) |> mutate(missi
 ggplot(df, aes(x=name, y=fct_rev(id), fill = missing)) + 
 geom_tile()
 ```
+since 10/18/2022 there are no 4 months interest rates.
