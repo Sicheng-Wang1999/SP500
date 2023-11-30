@@ -25,13 +25,13 @@
     "href": "data.html#description",
     "title": "2  Data",
     "section": "2.1 Description",
-    "text": "2.1 Description"
+    "text": "2.1 Description\n\nInterest rate data from 2022-2023 Daily interest rate data is collected by U.S Department of the Treasury and is downloaded as csv files. The data consists of 1 month rates to 30 year rates and is updated daily, note that since 10/18/2022 there are no 4 months interest rates.\n\n\n\nCode\nAPR22 = read.csv(\"daily-treasury-rates-2022.csv\")\nAPR23 = read.csv(\"daily-treasury-rates-2023.csv\")\nAPR = bind_rows(APR22,APR23)\nhead(APR)\n\n\n        Date X1.Mo X2.Mo X3.Mo X4.Mo X6.Mo X1.Yr X2.Yr X3.Yr X5.Yr X7.Yr X10.Yr\n1 12/30/2022  4.12  4.41  4.42  4.69  4.76  4.73  4.41  4.22  3.99  3.96   3.88\n2 12/29/2022  4.04  4.39  4.45  4.66  4.73  4.71  4.34  4.16  3.94  3.91   3.83\n3 12/28/2022  3.86  4.33  4.46  4.66  4.75  4.71  4.31  4.18  3.97  3.97   3.88\n4 12/27/2022  3.87  4.32  4.46  4.66  4.76  4.75  4.32  4.17  3.94  3.93   3.84\n5 12/23/2022  3.80  4.20  4.34  4.59  4.67  4.66  4.31  4.09  3.86  3.83   3.75\n6 12/22/2022  3.80  4.20  4.35  4.57  4.66  4.64  4.24  4.02  3.79  3.77   3.67\n  X20.Yr X30.Yr\n1   4.14   3.97\n2   4.09   3.92\n3   4.13   3.98\n4   4.10   3.93\n5   3.99   3.82\n6   3.91   3.73"
   },
   {
     "objectID": "data.html#missing-value-analysis",
     "href": "data.html#missing-value-analysis",
     "title": "2  Data",
     "section": "2.2 Missing value analysis",
-    "text": "2.2 Missing value analysis"
+    "text": "2.2 Missing value analysis\n\n\nCode\ndf &lt;- APR22 |&gt; column_to_rownames(\"Date\")\ndf &lt;- df |&gt; rownames_to_column(\"id\") |&gt; pivot_longer(cols = -id) |&gt; mutate(missing = ifelse(is.na(value),\"yes\",\"no\"))\nggplot(df, aes(x=name, y=fct_rev(id), fill = missing)) + \ngeom_tile()\n\n\n\n\n\nsince 10/18/2022 there are no 4 months interest rates."
   }
 ]
