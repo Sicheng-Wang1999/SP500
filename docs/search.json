@@ -25,7 +25,7 @@
     "href": "data.html#description",
     "title": "2  Data",
     "section": "2.1 Description",
-    "text": "2.1 Description"
+    "text": "2.1 Description\n\nInterest rate data from 2022-2023 Daily interest rate data is collected by U.S Department of the Treasury and is downloaded as csv files. The data consists of 1 month rates to 30 year rates and is updated daily, note that since 10/18/2022 there are no 4 months interest rates.\n\n\n\nCode\nAPR = read.csv(\"daily-treasury-rates-2022.csv\")"
   },
   {
     "objectID": "data.html#missing-value-analysis",
