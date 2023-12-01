@@ -1,13 +1,18 @@
 # Data
+
 ```{r}
+#| warning: false
 library(dplyr)
 library(tidyverse)
+library(readxl)
+library(tidyquant)
+library(glue)
 ```
 
 ## Description
 
-1. Interest rate data from 2022-2023
-Daily interest rate data is collected by [U.S Department of the Treasury](https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve&field_tdr_date_value=2022) and is downloaded as csv files. The data consists of 1 month rates to 30 year rates and is updated daily, note that since 10/18/2022 there are no 4 months interest rates.
+1.  Interest rate data from 2022-2023 Daily interest rate data is collected by [U.S Department of the Treasury](https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve&field_tdr_date_value=2022) and is downloaded as csv files. The data consists of 1 month rates to 30 year rates and is updated daily, note that since 10/18/2022 there are no 4 months interest rates.
+
 ```{r}
 APR22 = read.csv("daily-treasury-rates-2022.csv")
 APR23 = read.csv("daily-treasury-rates-2023.csv")
@@ -15,7 +20,48 @@ APR = bind_rows(APR22,APR23)
 head(APR)
 ```
 
+Downloaded sp500 portfolio from https://www.slickcharts.com/sp500 as sp500rank.xlsx
+
+```{r}
+sp500rank <- read_excel("sp500rank.xlsx")
+sp500rank_list = unlist(sp500rank['Symbol'])
+top_105_symbols = sp500rank_list[1:105]
+last_105_symbols = rev(rev(sp500rank_list)[1:105])
+```
+
+The stock symbols are then used to download 20 year daily movement from yahoo finance
+
+```{r}
+options("getSymbols.warning4.0"=FALSE)
+options("getSymbols.yahoo.warning"=FALSE)
+getSymbols(top_105_symbols, from = '2003-10-30', to = "2023-10-30",warnings = FALSE)
+for (symbol in top_105_symbols) {
+  if (exists(symbol)) {
+    write.zoo(get(symbol), glue('data/{symbol}.csv'), sep = ",")
+  }
+}
+getSymbols(last_105_symbols, from = '2003-10-30', to = "2023-10-30",warnings = FALSE)
+for (symbol in last_105_symbols) {
+  if (exists(symbol)) {
+    write.zoo(get(symbol), glue('data/{symbol}.csv'), sep = ",")
+  }
+}
+```
+
+```{r}
+getSymbols('^GSPC', from = '2003-10-30', to = "2023-10-30",warnings = FALSE)
+write.zoo(GSPC, 'data/GSPC.csv', sep = ",")
+```
+
+Data collected:
+
+1.  2022-2023 Daily interest rate data from US Treasury, by Sicheng.
+2.  Up-to-date S&P500 portfolio data from <https://www.slickcharts.com/sp500>. The data is collected simply by copying the elements in the html table and paste into an excel sheet in xlsx. It has the rank, name, symbol, for each stock in the S&P500. This data helps us identify the stocks in S&P500 and how important they are by looking at the percentage each stock takes in the portfolio. The data is ranked by the current percentage and this helps us identify the important stocks and less important stocks in S&P500, allowing us to further explore individual stocks, by Shuai. A note is that there are more than 500 entries in S&P500 as some companies have more than one stock. For example, GOOGL and GOOG are both Google's.
+3.  20 years daily movement data from 2003-10-30 or as early as possible to 2023-10-27, for each stocks ranked in top 105 and each stocks ranked in last 105. The data is collected using tidyquant package and the source of data is Yahoo Finance according to the package. They are then written into separate csv files store under the data directory. For each stock, the csv file contains the date, open, close, highest, and lowest price, as well as the trade volume and adjusted price. Collecting these stock data allows us to explore the individual stocks performance and explore the differences in performance between the most important stocks and the least important stocks, as well as how the stocks are different. For example, are the less important stocks smaller and do they have smaller trade volume? or do they perform worse or not? by Shuai. A note is that the codes are commented out because downloading the data from Yahoo takes an extensive amount of time. Local data is csv will be available to use.
+4.  20 years daily movement data from 2003-10-30 to 2023-10-27 for S&P500. It is sourced, formatted, and stored the same way as the individual stock data. Using this data, we can compare the individual stock performance with the S&P500 index and explore. For example, is there any stock that actually moves against S&P500, or are there any outliers? by Shuai.
+
 ## Missing value analysis
+
 ```{r}
 df <- APR |> column_to_rownames("Date")
 df <- df |> rownames_to_column("id") |> pivot_longer(cols = -id) |> mutate(missing = ifelse(is.na(value),"yes","no"))
@@ -23,4 +69,7 @@ df <- df |> mutate(id = as.Date(id, format = "%m/%d/%Y"))
 ggplot(df, aes(x=name, y=id, fill = missing)) + 
     geom_tile()
 ```
+
 Before 10/18/2022 there are no 4 months interest rates.
+
+There is no missing value in the stock data. However, due to some stocks entering the market late, earlier data does not exist for those stocks.
