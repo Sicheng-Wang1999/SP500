@@ -32,6 +32,6 @@
     "href": "data.html#missing-value-analysis",
     "title": "2  Data",
     "section": "2.2 Missing value analysis",
-    "text": "2.2 Missing value analysis\n\n\nCode\ndf &lt;- APR22 |&gt; column_to_rownames(\"Date\")\ndf &lt;- df |&gt; rownames_to_column(\"id\") |&gt; pivot_longer(cols = -id) |&gt; mutate(missing = ifelse(is.na(value),\"yes\",\"no\"))\nggplot(df, aes(x=name, y=fct_rev(id), fill = missing)) + \ngeom_tile()\n\n\n\n\n\nsince 10/18/2022 there are no 4 months interest rates."
+    "text": "2.2 Missing value analysis\n\n\nCode\ndf &lt;- APR |&gt; column_to_rownames(\"Date\")\ndf &lt;- df |&gt; rownames_to_column(\"id\") |&gt; pivot_longer(cols = -id) |&gt; mutate(missing = ifelse(is.na(value),\"yes\",\"no\"))\ndf &lt;- df |&gt; mutate(id = as.Date(id, format = \"%m/%d/%Y\"))\nggplot(df, aes(x=name, y=id, fill = missing)) + \n    geom_tile()\n\n\n\n\n\nBefore 10/18/2022 there are no 4 months interest rates."
   }
 ]

@@ -17,9 +17,10 @@ head(APR)
 
 ## Missing value analysis
 ```{r}
-df <- APR22 |> column_to_rownames("Date")
+df <- APR |> column_to_rownames("Date")
 df <- df |> rownames_to_column("id") |> pivot_longer(cols = -id) |> mutate(missing = ifelse(is.na(value),"yes","no"))
-ggplot(df, aes(x=name, y=fct_rev(id), fill = missing)) + 
-geom_tile()
+df <- df |> mutate(id = as.Date(id, format = "%m/%d/%Y"))
+ggplot(df, aes(x=name, y=id, fill = missing)) + 
+    geom_tile()
 ```
-since 10/18/2022 there are no 4 months interest rates.
+Before 10/18/2022 there are no 4 months interest rates.
