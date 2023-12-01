@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "SP500",
     "section": "",
-    "text": "1 Introduction\nThis project aims to unravel the mysteries and trends hidden behind the S&P 500 Index. The S&P 500, or Standard & Poor’s 500, represents a collection of 500 leading companies and takes up approximately 80% of available market capitalization."
+    "text": "1 Introduction\nThis project aims to unravel the mysteries and trends hidden behind the S&P 500 Index. The S&P 500, or Standard & Poor’s 500, represents a collection of 500 leading companies and takes up approximately 80% of available market capitalization. Taking Exploratory Data Analysis as our compass, we adventure through the vast financial landscape of historical returns, risks, and sectors within the index."
   },
   {
     "objectID": "index.html#why-explore-sp-500",
@@ -18,7 +18,7 @@
     "href": "index.html#what-to-expect",
     "title": "SP500",
     "section": "1.2 What to Expect",
-    "text": "1.2 What to Expect\n\n1. Performance of Index v.s. individual stock\nWe are interested in seeing the trends of the S&P 500 Index within 5 years and its comparison with individual constituents of the index. Which subset of the pool outperforms the index.\n\n\n2. Sector/location v.s. Performance\nAfter locating the companies that have over/under index performance, we would like to investigate if that has any correlation with certain properties of the company including headquarter location and business sector.\n\n\n3. Resilience v.s. Performance\nIdentify bad times, and see how soon the economy recovers. Is it true that companies that can recover fast from bad economic situations will succeed?\n\n\n4. Interest Rate/Unemployment Rate v.s. S&P 500 index\nHow are macroeconomic factors including Interest Rate/Unemployment Rate related to the S&P 500 index?"
+    "text": "1.2 What to Expect\n\n1. Performance of Index v.s. individual stock\nWe are interested in seeing the trends (ups and downs, seasonality, significant milestones) of the S&P 500 Index within 5 years and its comparison with individual constituents of the index. Which subset of the pool outperforms the index.\n\n\n2. Sector/location v.s. Performance\nAfter locating the companies that have over/under index performance, we would like to investigate if that has any correlation with certain properties of the company including headquarter location and business sector.\n\n\n3. Resilience v.s. Performance\nIdentify bad times, and see how soon the economy recovers. Is it true that companies that can recover fast from bad economic situations will succeed in the future?\n\n\n4. Interest Rate/Unemployment Rate v.s. S&P 500 index\nHow are macroeconomic factors including Interest Rate/Unemployment Rate related to the S&P 500 index? Does low interest rate imply steady growth?"
   },
   {
     "objectID": "data.html#description",
