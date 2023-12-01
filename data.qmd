@@ -7,6 +7,8 @@ library(tidyverse)
 library(readxl)
 library(tidyquant)
 library(glue)
+library(tidyr)
+library(lubridate)
 ```
 
 ## Description
@@ -34,18 +36,18 @@ The stock symbols are then used to download 20 year daily movement from yahoo fi
 ```{r}
 options("getSymbols.warning4.0"=FALSE)
 options("getSymbols.yahoo.warning"=FALSE)
-getSymbols(top_105_symbols, from = '2003-10-30', to = "2023-10-30",warnings = FALSE)
-for (symbol in top_105_symbols) {
-  if (exists(symbol)) {
-    write.zoo(get(symbol), glue('data/{symbol}.csv'), sep = ",")
-  }
-}
-getSymbols(last_105_symbols, from = '2003-10-30', to = "2023-10-30",warnings = FALSE)
-for (symbol in last_105_symbols) {
-  if (exists(symbol)) {
-    write.zoo(get(symbol), glue('data/{symbol}.csv'), sep = ",")
-  }
-}
+#getSymbols(top_105_symbols, from = '2003-10-30', to = "2023-10-30",warnings = FALSE)
+#for (symbol in top_105_symbols) {
+#  if (exists(symbol)) {
+#    write.zoo(get(symbol), glue('data/{symbol}.csv'), sep = ",")
+#  }
+#}
+#getSymbols(last_105_symbols, from = '2003-10-30', to = "2023-10-30",warnings = FALSE)
+#for (symbol in last_105_symbols) {
+#  if (exists(symbol)) {
+#    write.zoo(get(symbol), glue('data/{symbol}.csv'), sep = ",")
+#  }
+#}
 ```
 
 ```{r}
@@ -72,4 +74,75 @@ ggplot(df, aes(x=name, y=id, fill = missing)) +
 
 Before 10/18/2022 there are no 4 months interest rates.
 
+```{r}
+start_date <- as.Date("2003-10-29")
+end_date <- as.Date("2023-11-05")
+date_sequence <- seq(start_date, end_date, by = "1 day")
+
+df <- data.frame(Date = date_sequence)
+df$Week_Start_Date <- floor_date(df$Date, unit = "week")
+unique_week_start_dates <- unique(df$Week_Start_Date)
+
+template_df <- data.frame(
+  Sunday = rep(0, length(unique_week_start_dates)),
+  Monday = rep(0, length(unique_week_start_dates)),
+  Tuesday = rep(0, length(unique_week_start_dates)),
+  Wednesday = rep(0, length(unique_week_start_dates)),
+  Thursday = rep(0, length(unique_week_start_dates)),
+  Friday = rep(0, length(unique_week_start_dates)),
+  Saturday = rep(0, length(unique_week_start_dates))
+)
+
+result_df <- cbind.data.frame(Week_Start_Date = unique_week_start_dates, template_df)
+
+result_df <- result_df %>%
+  select(Week_Start_Date, Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday)
+```
+
+```{r}
+sp500_missing <- result_df
+sp500_dates <- as.Date(unlist(read.csv("data/GSPC.csv")['Index']))
+for (date in sp500_dates) {
+    date <- as.Date(date)
+    week_start <- floor_date(date, unit = "week")
+    day_of_week <- weekdays(date)
+    day_of_week <- match(day_of_week, c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"))
+    sp500_missing[sp500_missing$Week_Start_Date == week_start, day_of_week] <- 1
+}
+```
+
+```{r}
+meta_missing <- result_df
+meta_dates <- as.Date(unlist(read.csv("data/META.csv")['Index']))
+for (date in meta_dates) {
+    date <- as.Date(date)
+    week_start <- floor_date(date, unit = "week")
+    day_of_week <- weekdays(date)
+    day_of_week <- match(day_of_week, c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"))
+    meta_missing[meta_missing$Week_Start_Date == week_start, day_of_week] <- 1
+}
+```
+
+```{r}
+long_df <- pivot_longer(sp500_missing, cols = -Week_Start_Date, names_to = "Day", values_to = "Value")
+
+ggplot(long_df, aes(x = Week_Start_Date, y = Day, fill = factor(Value))) +
+  geom_tile() +
+  scale_fill_manual(values = c("1" = "cornflowerblue", "0" = "red")) +
+  labs(fill = "Value", x = "Week Start Date", y = "Day of the Week", title = "S&P500") +
+  coord_flip()
+```
+
+```{r}
+long_df <- pivot_longer(meta_missing, cols = -Week_Start_Date, names_to = "Day", values_to = "Value")
+
+ggplot(long_df, aes(x = Week_Start_Date, y = Day, fill = factor(Value))) +
+  geom_tile() +
+  scale_fill_manual(values = c("1" = "cornflowerblue", "0" = "red")) +
+  labs(fill = "Value", x = "Week Start Date", y = "Day of the Week", title = "META") +
+  coord_flip()
+```
+
 There is no missing value in the stock data. However, due to some stocks entering the market late, earlier data does not exist for those stocks.
+
+While there is no missing data, market closes during holidays, so some dates will miss, but the data from Yahoo is accurate to use.
