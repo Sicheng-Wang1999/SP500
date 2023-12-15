@@ -1,1 +1,92 @@
 # Results
+```{r}
+library(plotly)
+```
+```{r}
+sectors <- read.csv("data/sectors.csv")
+stock_prices = read.csv("data/stocks2year.csv")
+stock_prices$sector = ""
+for (i in (1: 499)){
+  s = stock_prices[i,]$symbol
+  sec = ifelse(length(sectors[sectors$Symbol==s,])==0,NA,sectors[sectors$Symbol==s,]$Sector)
+  stock_prices[i,]$sector = sec
+}
+```
+
+```{r}
+g <- stock_prices[stock_prices$symbol!="CMG" & stock_prices$symbol!="AZO",] |> drop_na() |> ggplot(aes(x = close, y=close2, color=sector,text=symbol)) + 
+  geom_point(size=1) + 
+  stat_function(fun = function(x)  x, color = "black") + 
+  stat_function(fun = function(x)  0.8 * x, color = "black") + 
+  stat_function(fun = function(x)  1.2 * x, color = "black")
+ggplotly(g)
+```
+
+3 lines are drawn to mark the 20% return, 0% return and -20% return. By double click on individual sectors, We can see that energy companies were doing great for the last 2 years with over 20% return, while telecommunications services were not doing well and a large number of financial companies were losing value. 
+
+```{r}
+stock_prices$return <- stock_prices$close2/stock_prices$close - 1
+stock_prices$performance <- cut(stock_prices$return, breaks = c(-10,-0.2,0,0.2,10), labels=c('less than -20%', '-20 to 0 %', '0 to 20 %', 'over 20%'))
+stock_prices|> drop_na() |> ggplot(aes(y = sector)) + geom_bar(fill="cornflowerblue") + facet_wrap(~performance)
+```
+The performance of consumer discretionary sector seems to be evenly distributed over four categories. It is rare for consumer staples sector and materials sector companies to have more than 20% growth over 2 years. 
+
+```{r}
+unemployment = read.csv("data/unemployment.csv")
+sp500 = read.csv("data/sp500.csv")
+sp500 <- sp500 |> mutate(Date = as.Date(Date, format = "%Y/%m/%d"))
+df <- APR[c(1,4,6,11)]
+df <- df |> mutate(Date = as.Date(Date, format = "%m/%d/%Y"))
+unemployment <- unemployment |> mutate(date = as.Date(date, format = "%Y/%m/%d"))
+unemployment$date = format(unemployment$date, "%m/%Y")
+df$Date = format(df$Date, "%m/%Y")
+sp500$Date = format(sp500$Date, "%m/%Y")
+sp500$Close = readr::parse_number(sp500$Close)
+
+unemployment$X3.Mo = NA
+unemployment$X1.Yr = NA
+unemployment$X10.Yr = NA
+unemployment$price = NA
+s1 <- df|>group_by(Date)|>summarise(rate=mean(X3.Mo))
+s2 <- df|>group_by(Date)|>summarise(rate=mean(X1.Yr))
+s3 <- df|>group_by(Date)|>summarise(rate=mean(X10.Yr))
+s4 <- sp500|>group_by(Date)|>summarise(rate=mean(Close))
+for (i in (1: 35)){
+  d = unemployment[i,]$date
+  print(d)
+  unemployment[i,]$X3.Mo = s1[s1$Date==d,]$rate
+  unemployment[i,]$X1.Yr = s2[s2$Date==d,]$rate
+  unemployment[i,]$X10.Yr = s3[s3$Date==d,]$rate
+  unemployment[i,]$price = s4[s4$Date==d,]$rate
+}
+#unemployment |> drop_na() |> GGally::ggparcoord(columns=c(6,3,2,5), alpha = 0.3)
+parcoords::parcoords(
+    unemployment[c(3,2,6,5)],
+    rownames = F 
+    , brushMode = "1D-axes"
+    , reorderable = T
+    , queue = T    
+    )
+```
+We can see that employment rate and interest rate are negatively correlated; Extreme values (too high or too low) of unemployment rate often occurred with low sp500 index while sp500 peaks at low unemployment rates.
+
+```{r}
+stock_prices = read.csv("data/stocksCovid.csv")
+stock_prices$sector = ""
+for (i in (1: 496)){
+  s = stock_prices[i,]$symbol
+  sec = ifelse(length(sectors[sectors$Symbol==s,])==0,NA,sectors[sectors$Symbol==s,]$Sector)
+  stock_prices[i,]$sector = sec
+}
+stock_prices$resilience = (stock_prices$close3-stock_prices$close2)/(stock_prices$close - stock_prices$close2)
+g <- stock_prices |> drop_na() |> ggplot(aes(x = close, y=close2, color=sector,text=symbol)) + 
+  geom_point(size=1) + 
+  stat_function(fun = function(x)  x, color = "black")
+ggplotly(g)
+#write.csv(stock_prices2, "stocks2year.csv", row.names = FALSE)
+```
+Price of stocks of all sectors dropped a lot in the first few months of Covid. While a few of them stay stationary(no increase not decrease).
+```{r}
+stock_prices[stock_prices$resilience < 2 & stock_prices$resilience > 0,] |> drop_na() |> ggplot(aes(y=resilience)) + geom_histogram() + facet_wrap(~sector)
+```
+The utilities sector and energy sector had a very hard time recovering from the pandemic, while the financial sector recovers relatively slowly. The information technology sector appears to be the most resilient from the pandemic.

@@ -16,9 +16,10 @@ library(lubridate)
 1.  Interest rate data from 2022-2023 Daily interest rate data is collected by [U.S Department of the Treasury](https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve&field_tdr_date_value=2022) and is downloaded as csv files. The data consists of 1 month rates to 30 year rates and is updated daily, note that since 10/18/2022 there are no 4 months interest rates.
 
 ```{r}
+APR21 = read.csv("daily-treasury-rates-2021.csv")
 APR22 = read.csv("daily-treasury-rates-2022.csv")
 APR23 = read.csv("daily-treasury-rates-2023.csv")
-APR = bind_rows(APR22,APR23)
+APR = bind_rows(APR21,APR22,APR23)
 head(APR)
 ```
 
