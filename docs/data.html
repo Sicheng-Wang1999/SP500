@@ -221,26 +221,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>APR22 <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"daily-treasury-rates-2022.csv"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>APR23 <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"daily-treasury-rates-2023.csv"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>APR <span class="ot">=</span> <span class="fu">bind_rows</span>(APR22,APR23)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(APR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>APR21 <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"daily-treasury-rates-2021.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>APR22 <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"daily-treasury-rates-2022.csv"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>APR23 <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"daily-treasury-rates-2023.csv"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>APR <span class="ot">=</span> <span class="fu">bind_rows</span>(APR21,APR22,APR23)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(APR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>        Date X1.Mo X2.Mo X3.Mo X4.Mo X6.Mo X1.Yr X2.Yr X3.Yr X5.Yr X7.Yr X10.Yr
-1 12/30/2022  4.12  4.41  4.42  4.69  4.76  4.73  4.41  4.22  3.99  3.96   3.88
-2 12/29/2022  4.04  4.39  4.45  4.66  4.73  4.71  4.34  4.16  3.94  3.91   3.83
-3 12/28/2022  3.86  4.33  4.46  4.66  4.75  4.71  4.31  4.18  3.97  3.97   3.88
-4 12/27/2022  3.87  4.32  4.46  4.66  4.76  4.75  4.32  4.17  3.94  3.93   3.84
-5 12/23/2022  3.80  4.20  4.34  4.59  4.67  4.66  4.31  4.09  3.86  3.83   3.75
-6 12/22/2022  3.80  4.20  4.35  4.57  4.66  4.64  4.24  4.02  3.79  3.77   3.67
-  X20.Yr X30.Yr
-1   4.14   3.97
-2   4.09   3.92
-3   4.13   3.98
-4   4.10   3.93
-5   3.99   3.82
-6   3.91   3.73</code></pre>
+<pre><code>        Date X1.Mo X2.Mo X3.Mo X6.Mo X1.Yr X2.Yr X3.Yr X5.Yr X7.Yr X10.Yr
+1 12/31/2021  0.06  0.05  0.06  0.19  0.39  0.73  0.97  1.26  1.44   1.52
+2 12/30/2021  0.06  0.06  0.05  0.19  0.38  0.73  0.98  1.27  1.44   1.52
+3 12/29/2021  0.01  0.02  0.05  0.19  0.38  0.75  0.99  1.29  1.47   1.55
+4 12/28/2021  0.03  0.04  0.06  0.20  0.39  0.74  0.99  1.27  1.41   1.49
+5 12/27/2021  0.04  0.05  0.06  0.21  0.33  0.76  0.98  1.26  1.41   1.48
+6 12/23/2021  0.04  0.05  0.07  0.18  0.31  0.71  0.97  1.25  1.42   1.50
+  X20.Yr X30.Yr X4.Mo
+1   1.94   1.90    NA
+2   1.97   1.93    NA
+3   2.00   1.96    NA
+4   1.94   1.90    NA
+5   1.92   1.88    NA
+6   1.94   1.91    NA</code></pre>
 </div>
 </div>
 <p>Downloaded sp500 portfolio from https://www.slickcharts.com/sp500 as sp500rank.xlsx</p>
@@ -259,64 +260,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="st">"getSymbols.warning4.0"</span><span class="ot">=</span><span class="cn">FALSE</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="st">"getSymbols.yahoo.warning"</span><span class="ot">=</span><span class="cn">FALSE</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">getSymbols</span>(top_105_symbols, <span class="at">from =</span> <span class="st">'2003-10-30'</span>, <span class="at">to =</span> <span class="st">"2023-10-30"</span>,<span class="at">warnings =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>  [1] "MSFT"  "AAPL"  "AMZN"  "NVDA"  "GOOGL" "META"  "GOOG"  "TSLA"  "UNH"  
- [10] "LLY"   "JPM"   "XOM"   "AVGO"  "V"     "JNJ"   "PG"    "MA"    "HD"   
- [19] "ADBE"  "COST"  "CVX"   "MRK"   "ABBV"  "PEP"   "KO"    "WMT"   "CRM"  
- [28] "NFLX"  "ACN"   "MCD"   "BAC"   "LIN"   "AMD"   "CSCO"  "TMO"   "INTC" 
- [37] "ORCL"  "ABT"   "CMCSA" "DIS"   "PFE"   "WFC"   "INTU"  "VZ"    "PM"   
- [46] "DHR"   "AMGN"  "IBM"   "QCOM"  "TXN"   "COP"   "NOW"   "UNP"   "SPGI" 
- [55] "NKE"   "GE"    "HON"   "CAT"   "BA"    "AMAT"  "NEE"   "LOW"   "RTX"  
- [64] "SBUX"  "T"     "BKNG"  "ELV"   "GS"    "ISRG"  "UPS"   "MDT"   "PLD"  
- [73] "BLK"   "TJX"   "BMY"   "LMT"   "SYK"   "DE"    "MS"    "MMC"   "MDLZ" 
- [82] "AXP"   "PGR"   "AMT"   "LRCX"  "ADP"   "GILD"  "CB"    "ADI"   "ETN"  
- [91] "VRTX"  "CVS"   "C"     "REGN"  "PANW"  "CI"    "MU"    "SCHW"  "SNPS" 
-[100] "ZTS"   "BSX"   "FI"    "CME"   "SO"   </code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (symbol <span class="cf">in</span> top_105_symbols) {</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">exists</span>(symbol)) {</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write.zoo</span>(<span class="fu">get</span>(symbol), <span class="fu">glue</span>(<span class="st">'data/{symbol}.csv'</span>), <span class="at">sep =</span> <span class="st">","</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">getSymbols</span>(last_105_symbols, <span class="at">from =</span> <span class="st">'2003-10-30'</span>, <span class="at">to =</span> <span class="st">"2023-10-30"</span>,<span class="at">warnings =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>  [1] "K"    "TSN"  "AMCR" "POOL" "ESS"  "DPZ"  "ENPH" "CAG"  "MAS"  "CE"  
- [11] "PODD" "SYF"  "UAL"  "L"    "LNT"  "CFG"  "HST"  "NDSN" "MOS"  "LKQ" 
- [21] "GEN"  "ZBRA" "LYV"  "IP"   "EVRG" "IPG"  "KIM"  "AES"  "JKHY" "SJM" 
- [31] "ROL"  "TAP"  "APA"  "KEY"  "MGM"  "TRMB" "VTRS" "RVTY" "NRG"  "NI"  
- [41] "GL"   "PNR"  "CDAY" "TFX"  "REG"  "UDR"  "KMX"  "FFIV" "CRL"  "INCY"
- [51] "EMN"  "WRK"  "TECH" "CHRW" "CZR"  "CPT"  "HII"  "AOS"  "PEAK" "ETSY"
- [61] "HRL"  "QRVO" "ALLE" "MTCH" "JNPR" "HSIC" "AIZ"  "PAYC" "MKTX" "RHI" 
- [71] "NWSA" "UHS"  "PNW"  "WYNN" "CPB"  "AAL"  "BWA"  "BXP"  "FOXA" "TPR" 
- [81] "CTLT" "BBWI" "GNRC" "FRT"  "BEN"  "PARA" "XRAY" "FMC"  "BIO"  "IVZ" 
- [91] "NCLH" "WHR"  "HAS"  "CMA"  "VFC"  "DVA"  "ZION" "RL"   "SEE"  "ALK" 
-[101] "MHK"  "SEDG" "FOX"  "NWS" </code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (symbol <span class="cf">in</span> last_105_symbols) {</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">exists</span>(symbol)) {</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write.zoo</span>(<span class="fu">get</span>(symbol), <span class="fu">glue</span>(<span class="st">'data/{symbol}.csv'</span>), <span class="at">sep =</span> <span class="st">","</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#getSymbols(top_105_symbols, from = '2003-10-30', to = "2023-10-30",warnings = FALSE)</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#for (symbol in top_105_symbols) {</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#  if (exists(symbol)) {</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#    write.zoo(get(symbol), glue('data/{symbol}.csv'), sep = ",")</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#  }</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#}</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#getSymbols(last_105_symbols, from = '2003-10-30', to = "2023-10-30",warnings = FALSE)</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#for (symbol in last_105_symbols) {</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#  if (exists(symbol)) {</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#    write.zoo(get(symbol), glue('data/{symbol}.csv'), sep = ",")</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#  }</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getSymbols</span>(<span class="st">'^GSPC'</span>, <span class="at">from =</span> <span class="st">'2003-10-30'</span>, <span class="at">to =</span> <span class="st">"2023-10-30"</span>,<span class="at">warnings =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getSymbols</span>(<span class="st">'^GSPC'</span>, <span class="at">from =</span> <span class="st">'2003-10-30'</span>, <span class="at">to =</span> <span class="st">"2023-10-30"</span>,<span class="at">warnings =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "GSPC"</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.zoo</span>(GSPC, <span class="st">'data/GSPC.csv'</span>, <span class="at">sep =</span> <span class="st">","</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.zoo</span>(GSPC, <span class="st">'data/GSPC.csv'</span>, <span class="at">sep =</span> <span class="st">","</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Data collected:</p>
@@ -332,11 +300,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> APR <span class="sc">|&gt;</span> <span class="fu">column_to_rownames</span>(<span class="st">"Date"</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> <span class="fu">rownames_to_column</span>(<span class="st">"id"</span>) <span class="sc">|&gt;</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>id) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">missing =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(value),<span class="st">"yes"</span>,<span class="st">"no"</span>))</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">as.Date</span>(id, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>))</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x=</span>name, <span class="at">y=</span>id, <span class="at">fill =</span> missing)) <span class="sc">+</span> </span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_tile</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> APR <span class="sc">|&gt;</span> <span class="fu">column_to_rownames</span>(<span class="st">"Date"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> <span class="fu">rownames_to_column</span>(<span class="st">"id"</span>) <span class="sc">|&gt;</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>id) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">missing =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(value),<span class="st">"yes"</span>,<span class="st">"no"</span>))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">as.Date</span>(id, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x=</span>name, <span class="at">y=</span>id, <span class="at">fill =</span> missing)) <span class="sc">+</span> </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_tile</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="data_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
@@ -346,68 +314,68 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>start_date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">"2003-10-29"</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>end_date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">"2023-11-05"</span>)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>date_sequence <span class="ot">&lt;-</span> <span class="fu">seq</span>(start_date, end_date, <span class="at">by =</span> <span class="st">"1 day"</span>)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Date =</span> date_sequence)</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Week_Start_Date <span class="ot">&lt;-</span> <span class="fu">floor_date</span>(df<span class="sc">$</span>Date, <span class="at">unit =</span> <span class="st">"week"</span>)</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>unique_week_start_dates <span class="ot">&lt;-</span> <span class="fu">unique</span>(df<span class="sc">$</span>Week_Start_Date)</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>template_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">Sunday =</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(unique_week_start_dates)),</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">Monday =</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(unique_week_start_dates)),</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">Tuesday =</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(unique_week_start_dates)),</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">Wednesday =</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(unique_week_start_dates)),</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">Thursday =</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(unique_week_start_dates)),</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">Friday =</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(unique_week_start_dates)),</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">Saturday =</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(unique_week_start_dates))</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>result_df <span class="ot">&lt;-</span> <span class="fu">cbind.data.frame</span>(<span class="at">Week_Start_Date =</span> unique_week_start_dates, template_df)</span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>result_df <span class="ot">&lt;-</span> result_df <span class="sc">%&gt;%</span></span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Week_Start_Date, Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>start_date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">"2003-10-29"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>end_date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">"2023-11-05"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>date_sequence <span class="ot">&lt;-</span> <span class="fu">seq</span>(start_date, end_date, <span class="at">by =</span> <span class="st">"1 day"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Date =</span> date_sequence)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Week_Start_Date <span class="ot">&lt;-</span> <span class="fu">floor_date</span>(df<span class="sc">$</span>Date, <span class="at">unit =</span> <span class="st">"week"</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>unique_week_start_dates <span class="ot">&lt;-</span> <span class="fu">unique</span>(df<span class="sc">$</span>Week_Start_Date)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>template_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">Sunday =</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(unique_week_start_dates)),</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">Monday =</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(unique_week_start_dates)),</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">Tuesday =</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(unique_week_start_dates)),</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">Wednesday =</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(unique_week_start_dates)),</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">Thursday =</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(unique_week_start_dates)),</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">Friday =</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(unique_week_start_dates)),</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">Saturday =</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(unique_week_start_dates))</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>result_df <span class="ot">&lt;-</span> <span class="fu">cbind.data.frame</span>(<span class="at">Week_Start_Date =</span> unique_week_start_dates, template_df)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>result_df <span class="ot">&lt;-</span> result_df <span class="sc">%&gt;%</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Week_Start_Date, Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>sp500_missing <span class="ot">&lt;-</span> result_df</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>sp500_dates <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="fu">unlist</span>(<span class="fu">read.csv</span>(<span class="st">"data/GSPC.csv"</span>)[<span class="st">'Index'</span>]))</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (date <span class="cf">in</span> sp500_dates) {</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(date)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    week_start <span class="ot">&lt;-</span> <span class="fu">floor_date</span>(date, <span class="at">unit =</span> <span class="st">"week"</span>)</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    day_of_week <span class="ot">&lt;-</span> <span class="fu">weekdays</span>(date)</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    day_of_week <span class="ot">&lt;-</span> <span class="fu">match</span>(day_of_week, <span class="fu">c</span>(<span class="st">"Sunday"</span>, <span class="st">"Monday"</span>, <span class="st">"Tuesday"</span>, <span class="st">"Wednesday"</span>, <span class="st">"Thursday"</span>, <span class="st">"Friday"</span>, <span class="st">"Saturday"</span>))</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    sp500_missing[sp500_missing<span class="sc">$</span>Week_Start_Date <span class="sc">==</span> week_start, day_of_week] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sp500_missing <span class="ot">&lt;-</span> result_df</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>sp500_dates <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="fu">unlist</span>(<span class="fu">read.csv</span>(<span class="st">"data/GSPC.csv"</span>)[<span class="st">'Index'</span>]))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (date <span class="cf">in</span> sp500_dates) {</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(date)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    week_start <span class="ot">&lt;-</span> <span class="fu">floor_date</span>(date, <span class="at">unit =</span> <span class="st">"week"</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    day_of_week <span class="ot">&lt;-</span> <span class="fu">weekdays</span>(date)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    day_of_week <span class="ot">&lt;-</span> <span class="fu">match</span>(day_of_week, <span class="fu">c</span>(<span class="st">"Sunday"</span>, <span class="st">"Monday"</span>, <span class="st">"Tuesday"</span>, <span class="st">"Wednesday"</span>, <span class="st">"Thursday"</span>, <span class="st">"Friday"</span>, <span class="st">"Saturday"</span>))</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    sp500_missing[sp500_missing<span class="sc">$</span>Week_Start_Date <span class="sc">==</span> week_start, day_of_week] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>meta_missing <span class="ot">&lt;-</span> result_df</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>meta_dates <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="fu">unlist</span>(<span class="fu">read.csv</span>(<span class="st">"data/META.csv"</span>)[<span class="st">'Index'</span>]))</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (date <span class="cf">in</span> meta_dates) {</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(date)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    week_start <span class="ot">&lt;-</span> <span class="fu">floor_date</span>(date, <span class="at">unit =</span> <span class="st">"week"</span>)</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    day_of_week <span class="ot">&lt;-</span> <span class="fu">weekdays</span>(date)</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    day_of_week <span class="ot">&lt;-</span> <span class="fu">match</span>(day_of_week, <span class="fu">c</span>(<span class="st">"Sunday"</span>, <span class="st">"Monday"</span>, <span class="st">"Tuesday"</span>, <span class="st">"Wednesday"</span>, <span class="st">"Thursday"</span>, <span class="st">"Friday"</span>, <span class="st">"Saturday"</span>))</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    meta_missing[meta_missing<span class="sc">$</span>Week_Start_Date <span class="sc">==</span> week_start, day_of_week] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>meta_missing <span class="ot">&lt;-</span> result_df</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>meta_dates <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="fu">unlist</span>(<span class="fu">read.csv</span>(<span class="st">"data/META.csv"</span>)[<span class="st">'Index'</span>]))</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (date <span class="cf">in</span> meta_dates) {</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(date)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    week_start <span class="ot">&lt;-</span> <span class="fu">floor_date</span>(date, <span class="at">unit =</span> <span class="st">"week"</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    day_of_week <span class="ot">&lt;-</span> <span class="fu">weekdays</span>(date)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    day_of_week <span class="ot">&lt;-</span> <span class="fu">match</span>(day_of_week, <span class="fu">c</span>(<span class="st">"Sunday"</span>, <span class="st">"Monday"</span>, <span class="st">"Tuesday"</span>, <span class="st">"Wednesday"</span>, <span class="st">"Thursday"</span>, <span class="st">"Friday"</span>, <span class="st">"Saturday"</span>))</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    meta_missing[meta_missing<span class="sc">$</span>Week_Start_Date <span class="sc">==</span> week_start, day_of_week] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>long_df <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(sp500_missing, <span class="at">cols =</span> <span class="sc">-</span>Week_Start_Date, <span class="at">names_to =</span> <span class="st">"Day"</span>, <span class="at">values_to =</span> <span class="st">"Value"</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(long_df, <span class="fu">aes</span>(<span class="at">x =</span> Week_Start_Date, <span class="at">y =</span> Day, <span class="at">fill =</span> <span class="fu">factor</span>(Value))) <span class="sc">+</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"1"</span> <span class="ot">=</span> <span class="st">"cornflowerblue"</span>, <span class="st">"0"</span> <span class="ot">=</span> <span class="st">"red"</span>)) <span class="sc">+</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Value"</span>, <span class="at">x =</span> <span class="st">"Week Start Date"</span>, <span class="at">y =</span> <span class="st">"Day of the Week"</span>, <span class="at">title =</span> <span class="st">"S&amp;P500"</span>) <span class="sc">+</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>long_df <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(sp500_missing, <span class="at">cols =</span> <span class="sc">-</span>Week_Start_Date, <span class="at">names_to =</span> <span class="st">"Day"</span>, <span class="at">values_to =</span> <span class="st">"Value"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(long_df, <span class="fu">aes</span>(<span class="at">x =</span> Week_Start_Date, <span class="at">y =</span> Day, <span class="at">fill =</span> <span class="fu">factor</span>(Value))) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"1"</span> <span class="ot">=</span> <span class="st">"cornflowerblue"</span>, <span class="st">"0"</span> <span class="ot">=</span> <span class="st">"red"</span>)) <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Value"</span>, <span class="at">x =</span> <span class="st">"Week Start Date"</span>, <span class="at">y =</span> <span class="st">"Day of the Week"</span>, <span class="at">title =</span> <span class="st">"S&amp;P500"</span>) <span class="sc">+</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="data_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
@@ -416,13 +384,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>long_df <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(meta_missing, <span class="at">cols =</span> <span class="sc">-</span>Week_Start_Date, <span class="at">names_to =</span> <span class="st">"Day"</span>, <span class="at">values_to =</span> <span class="st">"Value"</span>)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(long_df, <span class="fu">aes</span>(<span class="at">x =</span> Week_Start_Date, <span class="at">y =</span> Day, <span class="at">fill =</span> <span class="fu">factor</span>(Value))) <span class="sc">+</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"1"</span> <span class="ot">=</span> <span class="st">"cornflowerblue"</span>, <span class="st">"0"</span> <span class="ot">=</span> <span class="st">"red"</span>)) <span class="sc">+</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Value"</span>, <span class="at">x =</span> <span class="st">"Week Start Date"</span>, <span class="at">y =</span> <span class="st">"Day of the Week"</span>, <span class="at">title =</span> <span class="st">"META"</span>) <span class="sc">+</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>long_df <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(meta_missing, <span class="at">cols =</span> <span class="sc">-</span>Week_Start_Date, <span class="at">names_to =</span> <span class="st">"Day"</span>, <span class="at">values_to =</span> <span class="st">"Value"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(long_df, <span class="fu">aes</span>(<span class="at">x =</span> Week_Start_Date, <span class="at">y =</span> Day, <span class="at">fill =</span> <span class="fu">factor</span>(Value))) <span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"1"</span> <span class="ot">=</span> <span class="st">"cornflowerblue"</span>, <span class="st">"0"</span> <span class="ot">=</span> <span class="st">"red"</span>)) <span class="sc">+</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Value"</span>, <span class="at">x =</span> <span class="st">"Week Start Date"</span>, <span class="at">y =</span> <span class="st">"Day of the Week"</span>, <span class="at">title =</span> <span class="st">"META"</span>) <span class="sc">+</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="data_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
