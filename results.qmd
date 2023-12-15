@@ -32,6 +32,11 @@ stock_prices|> drop_na() |> ggplot(aes(y = sector)) + geom_bar(fill="cornflowerb
 The performance of consumer discretionary sector seems to be evenly distributed over four categories. It is rare for consumer staples sector and materials sector companies to have more than 20% growth over 2 years. 
 
 ```{r}
+APR21 = read.csv("daily-treasury-rates-2021.csv")
+APR22 = read.csv("daily-treasury-rates-2022.csv")
+APR23 = read.csv("daily-treasury-rates-2023.csv")
+APR = bind_rows(APR21,APR22,APR23)
+head(APR)
 unemployment = read.csv("data/unemployment.csv")
 sp500 = read.csv("data/sp500.csv")
 sp500 <- sp500 |> mutate(Date = as.Date(Date, format = "%Y/%m/%d"))
